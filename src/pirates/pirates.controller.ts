@@ -1,0 +1,28 @@
+import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
+import { PiratesService } from './pirates.service';
+import { CreatePirateDto } from './dto/create-pirate.dto';
+
+@Controller('pirates')
+export class PiratesController {
+  constructor(private readonly piratesService: PiratesService) {}
+
+  @Post()
+  create(@Body() createPirateDto: CreatePirateDto) {
+    return this.piratesService.create(createPirateDto);
+  }
+
+  @Get()
+  findAll() {
+    return this.piratesService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.piratesService.findOne(id);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.piratesService.remove(id);
+  }
+}
